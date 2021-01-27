@@ -1,0 +1,109 @@
+---
+title: "Mid-term Exam"
+output: html_notebook
+---
+
+## 1. Write a R code to Generate  6x6 matrix (A) using the random numbers between 1 to 100 & generate another 6X6 matrix (B) using random number betwen 
+```{r}
+
+#Generate Matrix 6x6 a and b
+  c <- runif(36 , min=1, max = 100)
+  d<- runif(36 , min=500, max = 600)
+  a<-matrix(c,6,6,byrow=TRUE)
+  b<-matrix(d,6,6,byrow=TRUE)
+  a
+  b
+#a.Find range of matrix a and b
+  range(a)
+  range(b)
+  
+#b.find the max value of matrix a and b
+  max(a)
+  max(b)
+  
+#c.find the diagonal of matrix a and b
+  diag(a)
+  diag(b)
+  
+#d.Multiply matrix a and b
+  a%*%b
+  
+  
+#f. multiply matrix a and b and store the value into x
+  x<-a%*%b
+   x
+#e.Replace the 4th row of Matrix A with diagonal values of matrix B
+   a[4, ] <- diag(t(b))
+a
+   
+#g. Divide matrix a and b
+  
+ x<-a/b
+
+```
+
+## 2. Create table using dataframe following categories (a to f)
+```{r}
+  first_name <- c("Leapheng","Nyratt","Jenny","Kimteng","Lynan","Lya","Sothea","Bunrong","Nataly","Manich")
+  second_name <- c("Ty","Sang","Sun","Ley","Thon","Daro","Youk","Kit","Chea","Hann")
+  age <-c (20, 21 , 20 , 21 ,20 ,20, 20 , 22, 21, 20 )
+  occupation <- c("Student","Student","Student","Student","Student","Student","Student","Student","Student","Student")
+  place <- c("btb","sr","btb" ,"kpc","bmc","pp","bmc","kps","sr","sr")
+  random_number <- runif(10, min=1 , max=10)
+dataframe <- data.frame(
+  First_name=first_name,
+  Second_name=second_name,
+  Age=age,
+  Occupation=occupation,
+  Place=place,
+  Random_number=random_number
+)
+dataframe
+  dataframe[6]
+```
+##3. Create a .txt file (Minimum : 150 words) with the latest news (In English) in cambodia from the official news agency’s website(Note: Include the reference link) and do the following
+
+```{r}
+
+#a.Read .txt file
+library(tidytext) # for tokenization
+library(ggplot2) # for graph visualization
+library(dplyr)
+library(sentimentr)
+    a <- read.delim(file ="/cloud/project/mekong.txt" )
+    a
+
+#b.perform tokenization and count word
+Dataset <- data.frame(S.No=1, Text=a)
+Dataset
+
+#c.Identify the most repeated word and replace that word with “KIT”
+replace_gsub <- gsub("the", "KIT", Dataset)
+#d.Perform the Sentiment analysis
+Dataset
+result1<- sentiment(Dataset$Text) # To know number of sentences and words(Sentiment at the sentence level)
+result1
+result2 <-sentiment_by(Dataset$Text) # Total number of words
+result2
+result3<- get_sentences(Dataset) # To display the sentences
+result3
+result4<- emotion(Dataset$Text) # Emotion at the sentence level
+result4
+result5<- emotion_by(Dataset$Text) # Aggregated emotion by group(s)
+result5
+result6<- profanity(Dataset$Text) # Profanity at the sentence level
+result6
+result7<- profanity_by(Dataset$Text) # Aggregated profanity by group(s)
+result7
+
+
+
+```
+    
+
+
+
+
+
+
+

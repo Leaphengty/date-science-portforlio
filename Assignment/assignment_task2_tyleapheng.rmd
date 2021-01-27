@@ -1,0 +1,171 @@
+---
+title: "Assignment Task 2"
+output: html_notebook
+---
+# 1. Object x <-1:15
+Construct a 5x3 matrix for the value of x.
+```dim``` function to transform an n-dimensional array by giving it a dimensions attribute. 
+```{r}
+a <- 1:15
+dim(a) <- c(5, 3)
+print(a)
+```
+
+# 2. Write a program to generate the following 4x4 matrix
+```
+0 0 0 0
+0 0 0 0
+0 0 0 0
+```
+```{r}
+a = matrix(rep(0, 16), nrow=4 , ncol=4, byrow=TRUE)
+print(a)
+```
+
+# 3.The object x<-1:8
+Write a program to generate the following 3x8 matrix using "```cbind(),rbind(),rev(),rep()```"
+```
+1 2 3 4 5 6 7 8
+8 7 6 5 4 3 2 1
+3 3 3 3 3 3 3 3
+```
+```{r}
+a <- rbind(1:8, rev(1:8), rep(3, 8))
+print(a)
+```
+
+# 4. Chose two different(x,y) 4x4 matrix to perform the following arithmetic operations
+a. x + y
+b. x - y
+c. x*y
+d. x%*%y
+e. Difference between (c) &(d)
+f. Inverse of y
+g. z<-x/y
+h. Transpose of z
+i. Diagonal of transpose matrix
+```{r}
+x <- matrix(c(9, 5, 7, 9, 2, 3, 1, 9, 9, 4, 6, 7, 5, 6, 5, 7), 4, 4, byrow=TRUE)
+y <- matrix(c(5, 5, 6, 3, 9, 2, 4, 3, 2, 5, 6, 5, 16, 6, 8, 8), 4, 4, byrow=TRUE)
+print(x + y)
+print(x - y)
+print(x * y)
+print(x %*% y)
+print("(c) is element by element multiplication and (d) is matrix multiplication")
+print(solve(y))
+z <- x / y
+print(z)
+print(t(z))
+print(diag(t(z)))
+```
+
+# 5. Difference between (i) & (ii)
+i. x<-matrix(x<-1:9,3,3,byrow = TRUE)
+ii. x<-matrix(x<-1:9,3,3)
+```{r}
+x <- matrix(x <- 1:9, 3, 3, byrow=TRUE)
+print(x)
+x <- matrix(x <- 1:9, 3, 3)
+print(x)
+print("(i) it calculate the matrix row by row and (ii) it calculate the matrix column by column.")
+```
+
+# 6. Which function can we use for inner product and outer product in matrix calculation?
+```{r}
+a <- c(1, 2, 3)
+b <- c(3, 2, 1)
+print(a %*% b)
+print(a %o% b)
+print("%*% is used for inner product and %o% for outer product")
+```
+
+# 7. Explain the use of all.equal() function in Matrix with a sample program.
+```all.equal()``` is utility to compare matrices testing near equality. If two matrices is identical, it return true. Otherwise, It reports the differences if they are not identical. ```identical() or ==```.
+```{r}
+a <- matrix(1:4, ncol=2)
+b <- matrix(1:4, ncol=2)
+print(all.equal(a, b))
+a <- matrix(1:5, ncol=2)
+b <- matrix(3:7, ncol=3)
+print(all.equal(a, b))
+```
+
+# 8. Explain the use of dim() function with a sample program.
+```dim()``` is used to transform an atomic vector into an n-dimensional array by giving it a dimension attribute.
+```{r}
+a <- 1:6
+dim(a) <- c(2, 3)
+print(a)
+```
+
+# 9. Use of $ operator, and square brackets [] in List with example program.
+```$ or [[]] and []``` is used to subset vector inside list.
+```{r}
+a <- list(numbers = c(3, 5), logical = TRUE, strings = c("a", "b", "c"))
+a
+a[1]
+a$numbers
+sum(a$numbers)12
+```
+
+# 10. Explain ifelse() with example.
+It is a shorthand function of the traditional if...else statement.
+```{r}
+a = c(2, 9, 1, 4, 8)
+ifelse(a %% 2 == 0, "even", "odd")
+```
+
+# 11. Write a program to get the weight and height from the user to calculate the following cases
+a. If your BMI is less than 18.5, it falls within the underweight range.
+b. If your BMI is 18.5 to <25, it falls within the normal.
+c. If your BMI is 25.0 to <30, it falls within the overweight range.
+d. If your BMI is 30.0 or higher, it falls within the obese range.
+```{r}
+weight <- readline(prompt = "Enter the weight: ")
+weight <- as.integer(weight)
+weight
+height <- readline(prompt = "Enter the height: ")
+height <- as.integer(height)
+height
+bmi = round(weight / ((height/100)^2), 1)
+bmi
+ifelse(bmi >= 30.0, "Obesity", 
+       ifelse(bmi < 30.0 && bmi >= 25.0, "Overweight", 
+              ifelse(bmi < 25.0 && bmi >= 18.5, "Normal", "Underweight")
+              )
+       )
+```
+
+# 12. Difference between List and Data frame with an example program.
+```list``` creates a list the same way ```c``` creates a vector. However, lists do not group together individual values; lists group together R objects, such as atomic vectors and other lists.
+Data frames are the two-dimensional version of a list. It is the most useful storage structure for data analysis. It stores data in an excel spreadsheet format.
+```{r}
+list1 <- list(35: 53, "R", list(TRUE, FALSE))
+list1
+```
+```{r}
+df <- data.frame(face = c("three", "king", "ace"),
+                 suit = c("diamonds", "hearts", "clubs"), value = c(1, 2, 3))
+df
+```
+
+# 13. Difference between repeat and while loop with example program.
+They are companions to the ```for``` loop. ```while``` loop will take condition to run the loop whereas ```repeat``` doesn't take condition but we need to call ```break``` to exit the loop.
+```{r}
+b <- 1:5
+a <- 1
+while(a <= 3) {
+  print(b[a])
+  a <- a + 1
+}
+
+c<- 5
+repeat {
+  print(b[c])
+  c <- c - 1
+  if(c <= 2) {
+    break
+  }
+}
+```
+
